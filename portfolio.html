@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Full Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #141414;
+    --bg3: #1a1a1a;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0ede6;
+    --muted: #7a7774;
+    --accent: #c8a96e;
+    --accent2: #e8c98e;
+    --tag-bg: rgba(200, 169, 110, 0.1);
+    --tag-border: rgba(200, 169, 110, 0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: rgba(200,169,110,0.3); }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.5px solid var(--border);
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 2rem;
+    max-width: 800px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.875rem 2rem;
+    border: 0.5px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    transition: all 0.2s;
+    width: fit-content;
+  }
+
+  .hero-cta:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .hero-stats {
+    margin-top: 5rem;
+    display: flex;
+    gap: 3rem;
+    padding-top: 3rem;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.25rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* SECTION COMMON */
+  section {
+    padding: 6rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 3.5rem;
+  }
+
+  /* PROJECTS */
+  #projects { max-width: 1100px; }
+
+  .project-grid {
+    display: grid;
+    gap: 1.5px;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.3s ease;
+  }
+
+  .project-card:hover {
+    background: var(--bg3);
+    border-color: var(--border2);
+  }
+
+  .project-card:hover::before { height: 100%; }
+
+  .project-card.featured {
+    border-color: rgba(200,169,110,0.25);
+  }
+
+  .project-card.featured::after {
+    content: 'LIVE & DEPLOYED';
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    border: 0.5px solid var(--accent);
+    padding: 3px 8px;
+  }
+
+  .project-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    max-width: 560px;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    background: var(--tag-bg);
+    border: 0.5px solid var(--tag-border);
+    color: var(--accent);
+  }
+
+  .project-pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 220px;
+    padding-top: 0.25rem;
+  }
+
+  .pipeline-step {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 6px 12px;
+    border-left: 1px solid var(--border2);
+    letter-spacing: 0.04em;
+    position: relative;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .pipeline-step::before {
+    content: '→';
+    margin-right: 8px;
+    color: var(--accent);
+    opacity: 0.5;
+  }
+
+  .project-card:hover .pipeline-step {
+    color: var(--text);
+    border-color: rgba(200,169,110,0.3);
+  }
+
+  /* SKILLS */
+  #skills { border-top: 0.5px solid var(--border); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5px;
+  }
+
+  .skill-group {
+    background: var(--bg2);
+    padding: 1.75rem;
+    border: 0.5px solid var(--border);
+  }
+
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .skill-list li {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-list li::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  /* WHY HIRE */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5px;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .why-card {
+    background: var(--bg2);
+    padding: 2rem;
+    border: 0.5px solid var(--border);
+  }
+
+  .why-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .why-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.01em;
+  }
+
+  .why-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* CONTACT */
+  #contact {
+    border-top: 0.5px solid var(--border);
+    text-align: center;
+    padding: 6rem 3rem 5rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  #contact h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+    line-height: 1.1;
+  }
+
+  #contact p {
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.875rem 2rem;
+    border: 0.5px solid var(--border2);
+    color: var(--text);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .contact-link.primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  .contact-link.primary:hover {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: var(--bg);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.5s ease both; }
+  .hero h1 { animation: fadeUp 0.5s 0.1s ease both; }
+  .hero-desc { animation: fadeUp 0.5s 0.2s ease both; }
+  .hero-cta { animation: fadeUp 0.5s 0.3s ease both; }
+  .hero-stats { animation: fadeUp 0.5s 0.4s ease both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Dev Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Stack</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Full Stack Developer</div>
+  <h1>I build things that <em>actually work</em> in production.</h1>
+  <p class="hero-desc">Pipelines, portals, automation systems — real software solving real problems. Currently available for contract work.</p>
+  <a href="#projects" class="hero-cta">View my work ↓</a>
+
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">4</div>
+      <div class="stat-label">Projects built</div>
+    </div>
+    <div>
+      <div class="stat-num">1</div>
+      <div class="stat-label">Live & deployed</div>
+    </div>
+    <div>
+      <div class="stat-num">3+</div>
+      <div class="stat-label">APIs integrated</div>
+    </div>
+  </div>
+</div>
+
+<section id="projects">
+  <div class="section-label">Work</div>
+  <h2 class="section-title">Selected Projects</h2>
+
+  <div class="project-grid">
+
+    <!-- Project 3 — Client Tracker (FEATURED) -->
+    <div class="project-card featured">
+      <div>
+        <div class="project-number">01 / 04</div>
+        <div class="project-title">Client Project Tracker</div>
+        <p class="project-desc">
+          A full-stack client portal currently in production use. Clients log in to track project progress and send pings to their producer. On the producer side: project board, time tracking, notes, and a client directory. When a project closes, the system automatically generates a timestamped PDF report using local AI — pulling in time logs, notes, and a written summary — ready to send to the client.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Full Stack</span>
+          <span class="tag">Client Portal</span>
+          <span class="tag">PDF Generation</span>
+          <span class="tag">Local LLM</span>
+          <span class="tag">Time Tracking</span>
+          <span class="tag">Deployed</span>
+        </div>
+      </div>
+      <div class="project-pipeline">
+        <div class="pipeline-step">Client login & project view</div>
+        <div class="pipeline-step">Real-time ping system</div>
+        <div class="pipeline-step">Producer dashboard</div>
+        <div class="pipeline-step">Time tracking & notes</div>
+        <div class="pipeline-step">AI summary generation</div>
+        <div class="pipeline-step">Auto PDF report output</div>
+      </div>
+    </div>
+
+    <!-- Project 1 — TikTok Pipeline -->
+    <div class="project-card">
+      <div>
+        <div class="project-number">02 / 04</div>
+        <div class="project-title">AI Video Production Pipeline</div>
+        <p class="project-desc">
+          An end-to-end content automation system for TikTok. Pulls raw footage from Google Drive, asks the user to validate quality, then uses computer vision to reverse-engineer approved clips into scene and motion prompts. Those prompts feed into Google Veo 3 to generate a matching AI clip. Both videos are assembled dynamically in FFmpeg — consistent format, auto-captions, audio, and text overlays — outputting a ready-to-post 60-second video.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Computer Vision</span>
+          <span class="tag">Google Veo 3</span>
+          <span class="tag">FFmpeg</span>
+          <span class="tag">Google Drive API</span>
+          <span class="tag">Automation</span>
+        </div>
+      </div>
+      <div class="project-pipeline">
+        <div class="pipeline-step">Google Drive ingestion</div>
+        <div class="pipeline-step">Human validation gate</div>
+        <div class="pipeline-step">CV scene analysis</div>
+        <div class="pipeline-step">Prompt extraction</div>
+        <div class="pipeline-step">Veo 3 generation</div>
+        <div class="pipeline-step">Dynamic FFmpeg assembly</div>
+      </div>
+    </div>
+
+    <!-- Project 2 — Algorithm Analyser -->
+    <div class="project-card">
+      <div>
+        <div class="project-number">03 / 04</div>
+        <div class="project-title">Algorithm Complexity Analyser</div>
+        <p class="project-desc">
+          A developer tool that takes two code snippets and runs a full comparative analysis: static checks for comment quality, nesting depth, and function size; dynamic profiling for peak memory usage; Big O complexity estimation. Results are plotted on a comparison graph. Feedback is written by a locally-run Ollama model to keep costs at zero. Comes with a localhost frontend for clean usability.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Static Analysis</span>
+          <span class="tag">Big O</span>
+          <span class="tag">Memory Profiling</span>
+          <span class="tag">Data Viz</span>
+          <span class="tag">Local LLM</span>
+          <span class="tag">Frontend</span>
+        </div>
+      </div>
+      <div class="project-pipeline">
+        <div class="pipeline-step">Dual code input</div>
+        <div class="pipeline-step">Static analysis</div>
+        <div class="pipeline-step">Memory profiling</div>
+        <div class="pipeline-step">Big O estimation</div>
+        <div class="pipeline-step">Graph comparison</div>
+        <div class="pipeline-step">Local AI feedback</div>
+      </div>
+    </div>
+
+    <!-- Project 4 — Be Present -->
+    <div class="project-card">
+      <div>
+        <div class="project-number">04 / 04</div>
+        <div class="project-title">Be Present — Life OS Mobile App</div>
+        <p class="project-desc">
+          A mobile productivity app built around emotional accountability. The core mechanic is a persistent attachment object with a live health score — it deteriorates in real time when you leave a committed deep work session to scroll or switch apps. Features a dashboard with work hours tracked over time, a configurable boredom pre-session (user-set stillness window before starting), and iOS background detection to enforce session integrity. Currently in active development.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Mobile</span>
+          <span class="tag">iOS</span>
+          <span class="tag">Real-time State</span>
+          <span class="tag">App Lock Logic</span>
+          <span class="tag">Dashboard</span>
+          <span class="tag">In Progress</span>
+        </div>
+      </div>
+      <div class="project-pipeline">
+        <div class="pipeline-step">Identity onboarding</div>
+        <div class="pipeline-step">Attachment object mechanic</div>
+        <div class="pipeline-step">Deep work session lock</div>
+        <div class="pipeline-step">App exit detection</div>
+        <div class="pipeline-step">Health score decay</div>
+        <div class="pipeline-step">Progress dashboard</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label">Stack</div>
+  <h2 class="section-title">What I work with</h2>
+
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Backend</div>
+      <ul class="skill-list">
+        <li>Python</li>
+        <li>Node.js</li>
+        <li>REST API integration</li>
+        <li>FFmpeg (video processing)</li>
+        <li>PDF generation</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Frontend</div>
+      <ul class="skill-list">
+        <li>React</li>
+        <li>HTML / CSS / JS</li>
+        <li>Mobile (iOS)</li>
+        <li>Data visualisation</li>
+        <li>Client portals</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">AI & Automation</div>
+      <ul class="skill-list">
+        <li>Computer vision</li>
+        <li>Google Veo 3</li>
+        <li>Local LLMs (Ollama)</li>
+        <li>Prompt engineering</li>
+        <li>Pipeline architecture</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Infrastructure</div>
+      <ul class="skill-list">
+        <li>Google Drive API</li>
+        <li>Deployment & hosting</li>
+        <li>Static analysis tooling</li>
+        <li>Memory profiling</li>
+        <li>Auth & user sessions</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="why" style="border-top: 0.5px solid rgba(255,255,255,0.08); max-width: 1100px; margin: 0 auto; padding: 5rem 3rem;">
+  <div class="section-label">Why me</div>
+  <h2 class="section-title">What you actually get</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">01</div>
+      <div class="why-title">I build things that ship</div>
+      <p class="why-desc">One project is already live and in daily use. I don't just demo — I deploy, maintain, and iterate.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">02</div>
+      <div class="why-title">Full stack, front to back</div>
+      <p class="why-desc">Client-facing portals, backend automation, PDF generation, AI integration, video processing — I own the whole thing.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">03</div>
+      <div class="why-title">Cost-conscious by default</div>
+      <p class="why-desc">I reach for local LLMs when cloud AI isn't necessary. I build for efficiency, not bloat.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">04</div>
+      <div class="why-title">I understand business problems</div>
+      <p class="why-desc">The client tracker wasn't a tutorial — it was a real workflow problem I solved for myself and then productised.</p>
+    </div>
+  </div>
+</section>
+
+<div id="contact">
+  <div class="section-label" style="justify-content: center; margin-bottom: 1rem;">Contact</div>
+  <h2>Let's build something.</h2>
+  <p>Available for contract work and new projects. Tell me what you're trying to solve.</p>
+  <div class="contact-links">
+    <a href="mailto:your@email.com" class="contact-link primary">Email me</a>
+    <a href="https://github.com/" class="contact-link">GitHub</a>
+  </div>
+</div>
+
+<footer>
+  <p>Built with intent. No templates.</p>
+  <p>© 2026</p>
+</footer>
+
+</body>
+</html>
