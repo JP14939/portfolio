@@ -595,7 +595,7 @@
     <div class="project-card featured">
       <img class="project-media" src="media/rallymax_serve.gif" alt="Serve with pose skeleton, racket box and tracked ball trail" loading="lazy">
       <div>
-        <div class="project-number">01 / 04</div>
+        <div class="project-number">01 / 02</div>
         <div class="project-title">RallyMax — AI Tennis Swing Analysis</div>
         <p class="project-desc">
           Film a swing on your phone and get a 0–100 score against professional players, a breakdown by phase of the swing, and coaching tips. I built the ML pipeline: MediaPipe pose, YOLO models for the ball, racket and net, an audio classifier that finds the moment of contact (89% within ±3 frames), and Dynamic Time Warping against a database of ~650 pro swings. Built with two teammates. Runs on iOS, Android and web, deployed with Docker and CI/CD.
@@ -624,7 +624,7 @@
 
     <div class="project-card">
       <div>
-        <div class="project-number">02 / 04</div>
+        <div class="project-number">02 / 02</div>
         <div class="project-title">Client Project Tracker</div>
         <p class="project-desc">
           A full-stack client portal in production use. Clients log in to track project progress and ping their producer. On the producer side: project board, time tracking, notes and a client directory. When a project closes, it generates a timestamped PDF report with a summary written by a local LLM.
@@ -643,52 +643,6 @@
         <div class="pipeline-step">Producer dashboard</div>
         <div class="pipeline-step">Time tracking &amp; notes</div>
         <div class="pipeline-step">Auto PDF report</div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div>
-        <div class="project-number">03 / 04</div>
-        <div class="project-title">AI Video Production Pipeline</div>
-        <p class="project-desc">
-          Content automation for short-form video. Pulls raw footage from Google Drive, has a person approve it, uses computer vision to turn approved clips into scene and motion prompts for Google Veo 3, then assembles both videos in FFmpeg with captions, audio and overlays into a ready-to-post clip.
-        </p>
-        <div class="project-tags">
-          <span class="tag">Computer Vision</span>
-          <span class="tag">Google Veo 3</span>
-          <span class="tag">FFmpeg</span>
-          <span class="tag">Google Drive API</span>
-        </div>
-      </div>
-      <div class="project-pipeline">
-        <div class="pipeline-step">Drive ingestion</div>
-        <div class="pipeline-step">Human validation gate</div>
-        <div class="pipeline-step">CV scene analysis</div>
-        <div class="pipeline-step">Veo 3 generation</div>
-        <div class="pipeline-step">FFmpeg assembly</div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div>
-        <div class="project-number">04 / 04</div>
-        <div class="project-title">Algorithm Complexity Analyser</div>
-        <p class="project-desc">
-          Takes two code snippets and compares them: static checks (comment quality, nesting depth, function size), memory profiling, and Big O estimation, plotted side by side. A locally run Ollama model writes the feedback, so it costs nothing to run.
-        </p>
-        <div class="project-tags">
-          <span class="tag">Static Analysis</span>
-          <span class="tag">Big O</span>
-          <span class="tag">Profiling</span>
-          <span class="tag">Local LLM</span>
-        </div>
-      </div>
-      <div class="project-pipeline">
-        <div class="pipeline-step">Dual code input</div>
-        <div class="pipeline-step">Static analysis</div>
-        <div class="pipeline-step">Memory profiling</div>
-        <div class="pipeline-step">Big O estimation</div>
-        <div class="pipeline-step">Local AI feedback</div>
       </div>
     </div>
 
